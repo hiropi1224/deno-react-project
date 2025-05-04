@@ -1,25 +1,35 @@
 {
   "tasks": {
-    "dev": "deno run -A --node-modules-dir npm:vite",
+    "dev": "deno run -A npm:vite & deno run server:start",
     "build": "deno run -A --node-modules-dir npm:vite build",
     "preview": "deno run -A --node-modules-dir npm:vite preview",
     "serve": "deno run --allow-net --allow-read jsr:@std/http@1/file-server dist/",
+    "server:start": "deno run -A --watch ./api/main.ts",
     "fmt": "deno fmt",
     "fmt:check": "deno fmt --check"
   },
+  "nodeModulesDir": "auto",
   "compilerOptions": {
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "lib": ["ES2020", "DOM", "DOM.Iterable", "deno.ns"],
     "jsx": "react-jsx",
     "jsxImportSource": "react",
-    "jsxImportSourceTypes": "@types/react"
+    "jsxImportSourceTypes": "@types/react",
+    "types": [
+      "react",
+      "react-dom",
+      "@types/react-dom"
+    ]
   },
   "imports": {
     "@deno/vite-plugin": "npm:@deno/vite-plugin@^1.0.4",
+    "@oak/oak": "jsr:@oak/oak@^17.1.4",
+    "@tajpouria/cors": "jsr:@tajpouria/cors@^1.2.1",
     "@types/react": "npm:@types/react@^19.0.10",
     "@types/react-dom": "npm:@types/react-dom@^19.0.4",
     "@vitejs/plugin-react-swc": "npm:@vitejs/plugin-react-swc@^3.8.0",
     "react": "npm:react@^19.0.0",
     "react-dom": "npm:react-dom@^19.0.0",
+    "react-router-dom": "npm:react-router-dom@^7.5.3",
     "vite": "npm:vite@^6.1.1"
   },
   "lint": {
